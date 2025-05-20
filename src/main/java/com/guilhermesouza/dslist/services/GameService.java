@@ -3,6 +3,7 @@ package com.guilhermesouza.dslist.services;
 import com.guilhermesouza.dslist.dto.GameDTO;
 import com.guilhermesouza.dslist.dto.GameMinDTO;
 import com.guilhermesouza.dslist.entities.Game;
+import com.guilhermesouza.dslist.projections.GameMinProjection;
 import com.guilhermesouza.dslist.repositories.GameRepository;
 import com.guilhermesouza.dslist.services.exceptions.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,6 +30,12 @@ public class GameService {
     @Transactional(readOnly = true)
     public List<GameMinDTO> findAll() {
         List<Game> result = gameRepository.findAll();
+        return result.stream().map(GameMinDTO::new).toList();
+    }
+
+    @Transactional(readOnly = true)
+    public List<GameMinDTO> findByList(Long listId) {
+        List<GameMinProjection> result = gameRepository.searchByList(listId);
         return result.stream().map(GameMinDTO::new).toList();
     }
 }

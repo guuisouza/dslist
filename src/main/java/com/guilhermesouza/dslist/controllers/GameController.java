@@ -2,7 +2,6 @@ package com.guilhermesouza.dslist.controllers;
 
 import com.guilhermesouza.dslist.dto.GameDTO;
 import com.guilhermesouza.dslist.dto.GameMinDTO;
-import com.guilhermesouza.dslist.entities.Game;
 import com.guilhermesouza.dslist.services.GameService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -25,7 +24,7 @@ public class GameController {
     }
 
     @GetMapping(value = "/{id}")
-    public GameDTO findAll(@PathVariable Long id) {
+    public GameDTO findById(@PathVariable Long id) {
         return gameService.findById(id);
     }
 }
